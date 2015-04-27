@@ -3,57 +3,42 @@ package del3_1;
 import java.util.Scanner;
 
 class SnuTekst {
-	/*
-	 * Oppgave 1 Lag et nytt prosjekt og legg dette inn i din GIT repository.
-	 * Oppgaven går ut på å skrive ut tegnene i en streng i motsatt rekkefølge
-	 * (Basert på Exercise 18.9 fra lab onsdag, men med noen modifikasjoner)
-	 * Klassen skal hete SnuTekst. Skriv en rekursiv metode som viser innholdet
-	 * i en streng baklengs. Metoden skal ha følgende header: public static void
-	 * baklengs(String tekst) Skriv et testprogram (main-metode) som ber
-	 * brukeren om en streng. Ledeteksten skal være på norsk. Strengen skal så
-	 * skrives ut baklengs med en ledetekst på norsk. Når dette fungerer utgjør
-	 * dette første utgave av klassen og skal ha versjon 0.1. Gjør en Commit på
-	 * dette i GIT 
-	 * 
-	 * --- Gjør en branch i GIT og legg til funksjonalitet for å
-	 * telle antall tegn ved utskrift av hvert tegn. Resultatet skal skrives ut
-	 * (med passende ledetekst) etter at strengen er skrevet ut baklengs. Flere
-	 * av oppgavene i kapitlet har tips til hvordan man løser tilsvarende
-	 * problemstillinger. Når dette fungerer utgjør det andre utgave av klassen.
-	 * Gjør en Commit og foreta en merge mot master til versjon 0.2.
-	 * 
-	 *  ---- Gjør
-	 * en ny branch i GIT og omarbeid programmet slik at det bruker en
-	 * hjelpemetode for den rekursive metoden. Hensikten er at den rekursive
-	 * metoden ikke skal lage en ny streng for hvert kall. For å oppnå dette
-	 * skal den rekursive metoden nå ha headeren: public static void
-	 * baklengs(String tekst, int siste) Hjelpemetoden skal ha samme header som
-	 * den rekursive hadde tidligere. Når programmet fungerer som forventet og
-	 * du er fornøyd, gjør Commit og foreta en merge mot master til versjon 0.3.
-	 * Publiser løsningen på GitHub.
-	 */
 
 	public static void main(String[] args) {
+
 		Scanner input = new Scanner(System.in);
-		System.out.println("Skriv inn tekst her og programmet vil returnere teksten baklengs:");
+		System.out.println("Skriv inn tekst her så vil programmet returnere baklengs:");
 		String tekst = input.nextLine();
 
-		System.out.println("Baklengs:");
-		baklengs(tekst);
-		System.out.println("\nAntall tegn: "+antallTegn);
+		System.out.println("\nBaklengs:");
+		baklengs(tekst, 0);
+		System.out.println("\nAntall tegn: " + antallTegn);
 		input.close();
-
 	}
 
 	static int antallTegn;
 
-	public static void baklengs(String tekst) {
-		if (tekst.length() != 0) {
+	public static void baklengs(String tekst, int siste) {
+		if (siste == 0) {
 			System.out.print(tekst.charAt(tekst.length() - 1));
 			antallTegn++;
-			String tekstNesteRunde;
-			tekstNesteRunde = tekst.substring(0, tekst.length() - 1);
-			baklengs(tekstNesteRunde);
+			hjelpeMetode(tekst.substring(0, tekst.length() - 1));
 		}
+		if (siste == 1) {
+			System.out.print(tekst.charAt(tekst.length() - 1));
+			antallTegn++;
+		} else if (siste > 1 || siste < 0)
+			System.out
+					.println("\nVerdi for Int Siste er utenfor grensen(0 eller 1)");
+	}
+
+	public static void hjelpeMetode(String tekst) {
+		if (tekst.length() > 1) {
+			baklengs(tekst, 0);
+		}
+		if (tekst.length() == 1) {
+			baklengs(tekst, 1);
+		} else if (tekst.length() < 0)
+			System.out.println("En feil har oppstaatt");
 	}
 }
