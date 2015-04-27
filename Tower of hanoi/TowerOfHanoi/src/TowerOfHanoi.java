@@ -11,16 +11,21 @@ public class TowerOfHanoi {
 		System.out.println("Trekkene er:");
 		moveDisks(n, 'A', 'B', 'C');
 		
+		System.out.println("Antall flyttinger: " +antallFlyttinger);
+		
 	}
-	
+	static int antallFlyttinger;
 	
 	public static void moveDisks(int n, char fromTower, char toTower, char auxTower){
-		if ( n==1 )
+		if ( n==1 ){
 			System.out.println("Flytter disk " +n + " fra " + fromTower + " til " + toTower);
-		 
+			antallFlyttinger++;
+		}
+		
 		else {
 			moveDisks( n-1, fromTower, auxTower, toTower);
 			System.out.println("Flytter disk " + n + " fra " +fromTower + " til " + toTower);
+			antallFlyttinger++;
 			moveDisks(n-1, auxTower, toTower, fromTower);
 		}
 	}
