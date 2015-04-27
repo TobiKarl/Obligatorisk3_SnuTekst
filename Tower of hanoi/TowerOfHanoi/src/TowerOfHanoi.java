@@ -12,9 +12,11 @@ public class TowerOfHanoi {
 		moveDisks(n, 'A', 'B', 'C');
 		
 		System.out.println("Antall flyttinger: " +antallFlyttinger);
+		System.out.println("Antall kall til den rekursive metoden: " + antallKall);
 		
 	}
 	static int antallFlyttinger;
+	static int antallKall;
 	
 	public static void moveDisks(int n, char fromTower, char toTower, char auxTower){
 		if ( n==1 ){
@@ -23,10 +25,11 @@ public class TowerOfHanoi {
 		}
 		
 		else {
-			moveDisks( n-1, fromTower, auxTower, toTower);
-			System.out.println("Flytter disk " + n + " fra " +fromTower + " til " + toTower);
+			moveDisks( n-1, fromTower, auxTower, toTower); antallKall++;
 			antallFlyttinger++;
-			moveDisks(n-1, auxTower, toTower, fromTower);
+			System.out.println("Flytter disk " + n + " fra " +fromTower + " til " + toTower);
+			
+			moveDisks(n-1, auxTower, toTower, fromTower); antallKall++;
 		}
 	}
 
