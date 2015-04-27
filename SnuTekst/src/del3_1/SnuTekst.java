@@ -1,5 +1,7 @@
 package del3_1;
 
+import java.util.Scanner;
+
 class SnuTekst {
    /*Oppgave 1
 	Lag et nytt prosjekt og legg dette inn i din GIT repository.
@@ -21,11 +23,25 @@ class SnuTekst {
 	*/
 
 	
-	public static void baklengs(String tekst){
-		
-	}
+
 	
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Skriv inn tekst her og programmet vil returnere teksten baklengs:");
+		String tekst=input.nextLine();
+		
+		System.out.println("Baklengs:");
+		baklengs(tekst);
+		input.close();
 	
+	}
+	public static void baklengs(String tekst){
+		if(tekst.length()!=0){
+			System.out.print(tekst.charAt(tekst.length()-1));
+			String tekstNesteRunde;
+			tekstNesteRunde=tekst.substring(0, tekst.length()-1);
+			baklengs(tekstNesteRunde);
+	    }
 	}
 }
